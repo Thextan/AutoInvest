@@ -30,13 +30,14 @@ def main():
     fn = "/tmp/{}.{}.json".format(instrument, granularity)
     if os.path.isfile(fn):
         os.remove(fn)
-    
     with open(fn, "w") as OUT:
         # The factory returns a generator generating consecutive
         # requests to retrieve full history from date 'from' till 'to'
+        json_data = list()
         for r in InstrumentsCandlesFactory(instrument=instrument, params=params):
             client.request(r)
-            OUT.write(json.dumps(r.response.get('candles'), indent=2))
+            json_data.extend(r.response.get('candles')) 
+        OUT.write(json.dumps(json_data, indent=2))
 
 if __name__ == "__main__":
     main()

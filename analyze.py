@@ -139,7 +139,7 @@ def prepare_Candle_data(filename):
         df = pd.read_json(filename)
     except:
         print(Exception)
-        
+
     df = df.set_index('time')
 
     analysis_set = []
@@ -152,4 +152,4 @@ def prepare_Candle_data(filename):
     return analysis_set
 
 filename = "/tmp/EUR_USD.M15.json"
-prepare_Candle_data(filename)
+my_data = prepare_Candle_data(filename)
